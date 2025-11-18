@@ -3,13 +3,17 @@ let numberOfButtons = document.querySelectorAll(".drum").length;
 for (let i = 0; i < numberOfButtons; i++) {
   document.querySelectorAll(".drum")[i].addEventListener("click", function () {
     //play audio
+    let buttonInnerHtml = this.innerHTML;
+    makeSound(buttonInnerHtml);
     //show animation
+    buttonAnimation(buttonInnerHtml);
   });
 }
 document.addEventListener("keypress", function (event) {
   //play audio
   makeSound(event.key);
   //show animation
+  buttonAnimation(event.key);
 });
 
 function makeSound(key) {
@@ -52,4 +56,13 @@ function makeSound(key) {
     default:
       console.log("key pressed", key);
   }
+}
+function buttonAnimation(key) {
+let activeButton = document.querySelector("." + key);
+activeButton.classList.add("pressed");
+
+setTimeout(function() {
+activeButton.classList.remove("pressed");
+},100)
+
 }
